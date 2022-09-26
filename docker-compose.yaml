@@ -1,0 +1,55 @@
+version: "3"
+
+services:
+
+  balancer:
+    build:
+      context: .
+      dockerfile: Dockerfile2
+    depends_on:
+      - memcached
+      - app_1
+      - app_2
+      - app_3
+      - app_4
+      - app_5
+    ports:
+      - "5000:5006"
+
+  app_1:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    depends_on:
+      - memcached
+
+  app_2:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    depends_on:
+      - memcached
+
+  app_3:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    depends_on:
+      - memcached
+
+  app_4:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    depends_on:
+      - memcached
+
+  app_5:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    depends_on:
+      - memcached
+
+  memcached:
+    image: memcached:latest
